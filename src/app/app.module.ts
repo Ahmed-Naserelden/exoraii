@@ -16,6 +16,8 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 import { UsersComponent } from './users/users.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { FormsModule } from '@angular/forms';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { FormsModule } from '@angular/forms';
     TicketComponent,
     UserprofileComponent,
     UsersComponent,
-    WishlistComponent
+    WishlistComponent,
+    NotificationsComponent,
+    HomeComponent
   ],
   imports: [
     FormsModule,
