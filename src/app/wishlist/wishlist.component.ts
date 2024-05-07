@@ -12,34 +12,34 @@ export class WishlistComponent{
 
 
     wishlist: Product[] = [];
-    // productsSubscription: Subscription | undefined;
+    productsSubscription: Subscription | undefined;
 
 
     constructor(private productService: ProductsService){
 
-      this.wishlist = productService.getProducts();
-      console.log(this.wishlist)
+      // this.wishlist = productService.getProducts();
+      // console.log(this.wishlist)
 
 
 
-      // this.productService.getProducts().subscribe(
-      //   (data)=>{
-      //     console.log("DAta")
-      //     console.log(data)
-      //     this.productsSubscription = data.data
-      //   },
-      //   (error) => {
-      //     console.error('Error fetching products:', error);
-      //   }
-      // );
-      // console.log("this.productsSubscription");
-      // console.log(this.productsSubscription);
+      this.productService.getProducts().subscribe(
+        (data)=>{
+          console.log("DAta")
+          console.log(data)
+          this.wishlist = data
+        },
+        (error) => {
+          console.error('Error fetching products:', error);
+        }
+      );
+      console.log("this.productsSubscription");
+      console.log(this.productsSubscription);
     }
 
 
-    // ngOnDestroy () {
-    //   this.productsSubscription?.unsubscribe();
-    // }
+    ngOnDestroy () {
+      this.productsSubscription?.unsubscribe();
+    }
 
     // ngOnInit(){
     //   this.productsSubscription = this.productService.getProducts().subscribe(products => {

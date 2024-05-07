@@ -1,0 +1,40 @@
+<div class="container">
+  <h2 class="text-center">Welcome back!!!</h2>
+
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="form-group">
+      <input type="text" id="email" name="email" [(ngModel)]="email" class="form-control" placeholder="Email Address" required>
+    </div>
+
+    <div class="form-group">
+      <input type="password" id="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Password" required>
+    </div>
+
+    <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="rememberMe">
+    <label class="form-check-label" for="rememberMe">Remember Me</label>
+    <a href="#" class="ml-auto" style="margin-left: 440px;">Forgot Password?</a>
+  </div>
+
+
+    <div class="text-center">
+      <button type="submit"  class="btn btn-primary">Login</button>
+    </div>
+
+    <p class="text-center mt-3">Or</p>
+
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn btn-light rounded-pill">
+        <i class="fab fa-google fa-lg mr-2"></i>Log in with Google
+      </button>
+
+      <button type="button" class="btn btn-light rounded-pill ml-2">
+        <i class="fab fa-apple fa-lg mr-2"></i>Log in with Apple ID
+      </button>
+    </div>
+
+    <div class="text-center mt-3">
+      <p>New customer? <a routerLink="/register">Sign up</a></p>
+    </div>
+  </form>
+  </div>

@@ -1,16 +1,15 @@
 
 
 export class Product{
-    name: String = "";
-    price: Number = 0;
-    description: String = "";
-    loc: String = "";
+    name: String = "mac";
+    price: Number = 1230;
+    description: String = "mac book air";
+    loc: String = "cairo";
     since: String = "weak ago";
-    images: File[] | undefined;
+    images: String[] | undefined;
 
     constructor(name:String, price:Number, describtion: String, loc: String){
         this.name = name;
         this.price = price
     }
-
 }

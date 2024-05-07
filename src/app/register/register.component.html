@@ -1,0 +1,53 @@
+<div class="container">
+  <h2>Welcome! Let's Get You Started</h2>
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit()" class="form">
+    <div>
+      <input type="text" id="fullName" name="fullName" [(ngModel)]="fullName" placeholder="Full Name" required>
+      <div *ngIf="registerForm.submitted && registerForm.controls['fullName'].invalid" class="error-message">
+        *You must enter your full name.*
+      </div>
+    </div>
+    <div>
+      <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Email Address" required>
+      <div *ngIf="registerForm.submitted && registerForm.controls['email'].invalid" class="error-message">
+        *You must enter your email address.*
+      </div>
+    </div>
+    <div>
+      <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Create Password" required>
+      <div *ngIf="registerForm.submitted && registerForm.controls['password'].invalid" class="error-message">
+        *Password is required.*
+      </div>
+      <div *ngIf="registerForm.controls['password'].valid && isWeakPassword(password)" class="error-message">
+        Password is too weak.
+      </div>
+      <div *ngIf="registerForm.controls['password'].valid && !isWeakPassword(password)" class="password-strength">
+        *Password strength: Strong.*
+      </div>
+    </div>
+    <div>
+      <input type="checkbox" id="termsAndConditions" name="termsAndConditions" [(ngModel)]="termsAndConditions" required>
+      <label for="termsAndConditions">I agree to Terms & Conditions</label>
+      <div *ngIf="registerForm.submitted && registerForm.controls['termsAndConditions'].invalid" class="error-message">
+        *Please agree to the Terms & Conditions.*
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="signUpButton">Sign Up</button>
+    </div>
+    <div class="alreadyCustomer">
+      <span>Already a customer? <a href="login">Login</a></span>
+    </div>
+    <div class="orText">
+      <span>or</span>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn btn-light rounded-pill">
+        <i class="fab fa-google fa-lg mr-2"></i>Log in with Google
+      </button>
+      <button type="button" class="btn btn-light rounded-pill ml-2">
+        <i class="fab fa-apple fa-lg mr-2"></i>Log in with Apple ID
+      </button>
+    </div>
+  </form>
+  </div>

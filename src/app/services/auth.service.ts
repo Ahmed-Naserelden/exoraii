@@ -1,26 +1,49 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-// import { AngularFireAuth } from '@angular/fire/auth';
+import { Injectable, inject } from '@angular/core';
+import { Observable, from } from 'rxjs';
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  user,
+  signOut
+} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // user$: Observable<any>;
+  firebaseAuth = inject(Auth);
+  user$ = user(this.firebaseAuth);
 
-  // constructor(private afAuth: AngularFireAuth) {
-  //   this.user$ = this.afAuth.authState;
-  // }
+  register(email: string, username: string, password: string): Observable<void>{
+    const promise = createUserWithEmailAndPassword(
+      this.firebaseAuth,
+      email,
+      password
+    ).then((response)=>{
+      console.log("Successful Registramtion");
+      updateProfile(response.user, {displayName: username})}
+    );
+    return from(promise);
+  }
 
-  // signUp(email: string, password: string) {
-  //   return this.afAuth.createUserWithEmailAndPassword(email, password);
-  // }
+  login(email: string, password: string): Observable<void> {
+    const promise = signInWithEmailAndPassword(
+      this.firebaseAuth,
+      email,
+      password
+    ).then((res) => {}).catch((err) => {
+      console.error("Login error:", err);
+      throw err;
+    });
 
-  // signIn(email: string, password: string) {
-  //   return this.afAuth.signInWithEmailAndPassword(email, password);
-  // }
+    return from(promise);
+  }
 
-  // signOut() {
-  //   return this.afAuth.signOut();
-  // }
+  logout(): Observable<void> {
+    const promise = signOut(this.firebaseAuth);
+    console.log("LOGOUT");
+    return from(promise);
+  }
 }

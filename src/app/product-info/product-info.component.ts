@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { Product } from '../model/product';
 
+
 // interface ProductInfo {
 //   taskName: string;
 //   description: string;
@@ -19,31 +20,24 @@ import { Product } from '../model/product';
 
 
 export class ProductInfoComponent {
-  // constructor(private productService: ProductsService){}
 
-  constructor(){}
 
   product: Product = new Product('', 0, '', '');
-  // productList: Product[] = [];
-
-  // Function to convert File to base64 string
-
+  image: File | undefined;
+  constructor(private productService: ProductsService){}
 
   addItem() {
     // Check if any of the form fields are empty
-    if (!this.product?.name || !this.product?.description || !this.product?.since || !this.product.price || !this.product?.loc) {
+    if ( !this?.image || !this.product?.name || !this.product?.description || !this.product?.since || !this.product.price || !this.product?.loc) {
       alert("Please fill in all fields.");
       return;
     }
 
-    // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
     // Push the current productInfo to the productList
-    // this.productService.addProduct(this.product);
+    this.productService.addProduct(this.product, this.image);
 
-    // this.productService.addProduct(this.productInfo);
-
-    // Reset productInfo for the next entry
     this.product = {
       name: '',
       description: '',
@@ -52,8 +46,7 @@ export class ProductInfoComponent {
       loc: '',
       images: [] // Reset the images property to an empty array
     };
-
-    // console.log(this.productService.getProducts());
+    console.log(this.productService.getProducts());
   }
 
 
@@ -65,12 +58,14 @@ export class ProductInfoComponent {
       //   if (!this.product.images) {
       //     this.product.images = [];
       //   }
-      //   this.product.images.push(file);
+      //   this.product.i mages.push(file);
 
       //   // Optionally, you can display the uploaded image immediately
       //   const base64Image = await this.convertFileToBase64(file);
       //   console.log(base64Image); // Do something with the base64Image
       // }
+      this.image = event.target.files[0];
+
     }
 
     // Handle file drop

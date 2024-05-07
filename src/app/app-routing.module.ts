@@ -6,6 +6,8 @@ import { ProductdetailsComponent } from './productdetails/productdetails.compone
 import { ProductInfoComponent } from './product-info/product-info.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {path: 'wishlist', component: WishlistComponent},
@@ -13,6 +15,8 @@ const routes: Routes = [
   {path: 'productdetails', component: ProductdetailsComponent},
   {path: 'post', component: ProductInfoComponent},
   {path: 'notification', component: NotificationsComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: '', component: HomeComponent},
 
 ];
