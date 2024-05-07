@@ -1,54 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Profile } from '../model/profile';
 import { Observable } from 'rxjs';
-// import { Firestore, addDoc, collection, collectionData } from '@angular/fire/firestore';
-// import { AngularFireStorage } from '@angular/fire/compat/storage';
-// import { AngularFireAuth } from '@angular/fire/auth';
+import { Firestore, addDoc, collection, doc, getDoc, collectionData  } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Product } from '../model/product';
+// import {  } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  constructor(){}
+  constructor(private fireStore: Firestore) { }
+
+  getData(userId: string): Observable<Profile>{
+    const userDocRef = doc(this.fireStore, 'profile', userId); // Reference to the user document
+    const userDocSnapshot = getDoc(userDocRef); // Retrieve the document snapshot
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // constructor(private fireStore: Firestore) { }
-
-  // getData(): Observable<Profile[]>{
-  //   const userCollection = collection(this.fireStore, 'users'); // collection(this.fireStore, 'products');
-  //   const user = collectionData(userCollection);
-  //   return user as Observable<Profile[]>;
-  // }
-
-  // addProfile(profile: Profile){
-  //   const userCollection = collection(this.fireStore, 'products');
-  //   addDoc(userCollection, {...profile});
-  // }
-
-
-  // getProfileByUsernameAndPassword(username: string, password: string): Observable<Profile | undefined> {
-  //   const query: QueryFn<DocumentData> = ref => ref.where('username', '==', username).where('password', '==', password).limit(1);
-  //   const userCollection: AngularFirestoreCollection<Profile> = this.firestore.collection('users', query);
-  //   const users: Observable<Profile[]> = userCollection.valueChanges();
-  //   return users.map(profiles => profiles.length ? profiles[0] : undefined);
-  // }
+    return new Observable<Profile>((observer) => {
+      userDocSnapshot.then((doc) => {
+        if (doc.exists()) {
+          const userData = doc.data() as Profile; // Convert Firestore document data to Profile type
+          observer.next(userData); // Emit the user data
+        } else {
+          observer.next(undefined); // Emit undefined if user document does not exist
+        }
+        observer.complete(); // Complete the observable
+      }).catch((error) => {
+        observer.error(error); // Emit an error if there's any issue fetching the document
+      });
+    });
+  }
 
 }

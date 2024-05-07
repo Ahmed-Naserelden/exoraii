@@ -1,13 +1,15 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { Observable, catchError, from, map, of } from 'rxjs';
 import {
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
   user,
-  signOut
+  signOut,
+
 } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,8 @@ import {
 export class AuthService {
   firebaseAuth = inject(Auth);
   user$ = user(this.firebaseAuth);
+
+  constructor(private router: Router){}
 
   register(email: string, username: string, password: string): Observable<void>{
     const promise = createUserWithEmailAndPassword(
@@ -46,4 +50,25 @@ export class AuthService {
     console.log("LOGOUT");
     return from(promise);
   }
+
+
+  checkAuthentication(): Observable<boolean> {
+    return this.user$.pipe(
+      map(user => !!user),
+      catchError(error => {
+        console.error("Authentication check error:", error);
+        return of(false);
+      })
+    );
+  }
+
+
+  redirectIfNotAuthenticated(): void {
+    this.checkAuthentication().subscribe(isAuthenticated => {
+      if (!isAuthenticated) {
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+
 }

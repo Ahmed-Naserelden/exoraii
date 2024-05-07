@@ -7,7 +7,7 @@
         </div>
         <div class="info" style="margin-left: 10%;">
             <div >
-                <h2 style="width:max-content">{{user_name}}</h2>
+                <h2 style="width:max-content">{{ profile?.name }}</h2>
                 <div class="ratings">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -16,26 +16,26 @@
                     <i class="fas fa-star-half-alt"></i>
                 </div>
             </div>
-            <span>({{reviews}}K Reviews)</span>
+            <span>({{profile?.reviews}}K Reviews)</span>
         </div>
     </div>
     <div>
-        <span class="meber-since key">Member Since: </span> <span class="meber-since val">sept 2018</span>
+        <span class="meber-since key">Member Since: </span> <span class="meber-since val"> {{ profile?.since}} </span>
     </div>
-    
+
 </div>
 
 <div class="boxes">
     <div class="products box">
-        <p><strong>Products</strong></p> 
+        <p><strong>Products</strong></p>
         <!-- <br> -->
-        <p>{{products}}</p>
-        
+        <p>{{profile?.products}}</p>
+
     </div>
     <div class="followers box">
-        <p><strong>Followers</strong></p> 
+        <p><strong>Followers</strong></p>
         <!-- <br> -->
-        <p>{{followers}}</p>
+        <p>{{profile?.followers}}</p>
     </div>
 </div>
 
@@ -47,11 +47,11 @@
     </div>
     <div class="field">
         <p class="key">Contact Number: </p>
-        <p class="val">{{contactnumber}}</p>
+        <p class="val">{{profile?.phone}}</p>
     </div>
     <div class="field">
         <p class="key">Date Of Birth: </p>
-        <p class="val">{{dateofbirth}}</p>
+        <p class="val">{{profile?.dateofbirth}}</p>
     </div>
 </div>
 

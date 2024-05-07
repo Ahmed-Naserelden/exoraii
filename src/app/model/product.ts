@@ -1,15 +1,19 @@
 
 
-export class Product{
-    name: String = "mac";
-    price: Number = 1230;
-    description: String = "mac book air";
-    loc: String = "cairo";
-    since: String = "weak ago";
-    images: String[] | undefined;
+export class Product {
+  name: string;
+  price: number;
+  description: string;
+  loc: string;
+  since: string;
+  images: string[] | undefined;
 
-    constructor(name:String, price:Number, describtion: String, loc: String){
-        this.name = name;
-        this.price = price
-    }
+  constructor(name: string, price: number, description: string, loc: string) {
+    this.name = name;
+    this.price = price;
+    this.description = description;
+    this.loc = loc;
+    this.since = ''; // Assuming since is an empty string by default
+    this.images = undefined; // Assuming images is undefined by default
+  }
 }

@@ -8,16 +8,18 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
+import { AuthRedirectGuard } from './auth-redirect.guard';
 
 const routes: Routes = [
-  {path: 'wishlist', component: WishlistComponent},
-  {path: 'profile', component: UserprofileComponent},
-  {path: 'productdetails', component: ProductdetailsComponent},
-  {path: 'post', component: ProductInfoComponent},
-  {path: 'notification', component: NotificationsComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: '', component: HomeComponent},
+  {path: 'login', component: LoginComponent, canActivate: [AuthRedirectGuard]},
+  {path: 'register', component: RegisterComponent, canActivate: [AuthRedirectGuard] },
+  {path: '', component: HomeComponent,  canActivate: [AuthGuard]},
+  {path: 'post', component: ProductInfoComponent, canActivate: [AuthGuard]},
+  {path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: UserprofileComponent, canActivate: [AuthGuard]},
+  {path: 'notification', component: NotificationsComponent, canActivate: [AuthGuard]},
+  {path: 'productdetails', component: ProductdetailsComponent, canActivate: [AuthGuard]},
 
 ];
 
