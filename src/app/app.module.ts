@@ -29,6 +29,7 @@ import { provideStorage } from '@angular/fire/storage'
 import { getStorage } from 'firebase/storage';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { MyordersComponent } from './myorders/myorders.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAaaxew6bQkNEptvm8d_Xyn5wg0_cqL6z0",
@@ -57,7 +58,8 @@ const firebaseConfig = {
     NotificationsComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    MyordersComponent
   ],
   imports: [
     FormsModule,

@@ -7,7 +7,7 @@
     position: relative;
     margin: 0px;
 }
-.fa-heart{
+.fa-heart , .fa-times{
     position: absolute;
     left: 84%;
     top: 10%;

@@ -39,11 +39,15 @@ export class ProductInfoComponent {
     this.productService.addProduct(this.product, this.image);
 
     this.product = {
+      id: "",
       name: '',
       description: '',
       since: '',
       price: 0,
       loc: '',
+      sellerEmail: '',
+      buyerEmail: '',
+      wisherEmail: '',
       images: [] // Reset the images property to an empty array
     };
     console.log(this.productService.getProducts());

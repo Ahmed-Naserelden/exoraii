@@ -4,23 +4,21 @@ import { Subscription } from 'rxjs';
 import { ProductsService } from '../services/products.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  selector: 'app-myorders',
+  templateUrl: './myorders.component.html',
+  styleUrl: './myorders.component.css'
 })
-export class HomeComponent {
+export class MyordersComponent {
+  
   wishlist: Product[] = [];
   productsSubscription: Subscription | undefined;
 
 
   constructor(private productService: ProductsService){
 
-    // this.wishlist = productService.getProducts();
-    // console.log(this.wishlist)
 
 
-
-    this.productService.getProducts().subscribe(
+    this.productService.getMyOrders().subscribe(
       (data)=>{
         console.log("DAta")
         console.log(data)
@@ -30,16 +28,15 @@ export class HomeComponent {
         console.error('Error fetching products:', error);
       }
     );
+
     console.log("this.productsSubscription");
     console.log(this.productsSubscription);
   }
 
-  buyOrder(i: number){
-    this.productService.buyPorduct(this.wishlist[i]);
-  }
-
+  
 
   ngOnDestroy () {
     this.productsSubscription?.unsubscribe();
   }
+
 }

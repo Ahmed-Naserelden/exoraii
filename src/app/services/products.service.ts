@@ -8,6 +8,8 @@ import { TicketComponent } from '../ticket/ticket.component';
 import { Product } from '../model/product';
 import { Firestore, addDoc, setDoc, deleteDoc, doc, collection, collectionData } from '@angular/fire/firestore';
 import { Storage, ref, uploadBytesResumable } from '@angular/fire/storage';
+import { AuthService } from './auth.service';
+import { query, where } from 'firebase/firestore';
 
 // import { AngularFireStorage } from '@angular/fire/compat/storage';
 
@@ -20,10 +22,15 @@ export class ProductsService {
   private firestore = inject(Firestore);
   private storage = inject(Storage);
 
+
+
   productsCollection = collection(this.firestore, 'products');
+  wishListCollection = collection(this.firestore, 'wishlists');
+  myordersCollection = collection(this.firestore, 'myorders');
 
 
-  constructor(){}
+
+  constructor(private autSer: AuthService){}
 
 
   getProducts(): Observable<Product[]>{
@@ -51,7 +58,9 @@ export class ProductsService {
 
   addProduct(product: Product, file: File): Observable<String>{
     // uploadFile(file);
+    product.sellerEmail = this.autSer.email;
     const productData = { ...product };
+    console.log(productData)
     const promise = addDoc(this.productsCollection, productData).then((res) => {
       return res.id;
     });
@@ -71,5 +80,83 @@ export class ProductsService {
     return from(deletePromise);
   }
 
+
+
+  addToWishList(product: Product){
+    product.wisherEmail = this.autSer.email;
+    console.log('this.autSer.email', this.autSer.email)
+    const productData = { ...product };
+
+    const promise = addDoc(this.wishListCollection, productData).then((res) => {
+      return res.id;
+    });
+
+    return from(promise);
+
+  }
+
+  getWishList(): Observable<Product[]> {
+
+    // Perform a query to filter products by seller field
+    const dquery = query(this.wishListCollection, where('wisherEmail', '==', this.autSer.email));
+
+    // Convert the query snapshot to observable
+    return collectionData(dquery, { idField: 'id' }) as Observable<Product[]>;
+  }
+
+
+  async removeFromWishList(id: string): Promise<void> {
+    // console.log("ID", product.id)
+    try {
+      // Assuming 'wishlist' is the name of the collection where wish list items are stored
+      const wishListDocRef = doc(this.wishListCollection, id);
+
+      // Delete the document from Firestore
+      await deleteDoc(wishListDocRef);
+
+      console.log('Product removed from wish list successfully.');
+    } catch (error) {
+        console.error('Error removing product from wish list:', error);
+        throw error; // Optionally, you can rethrow the error or handle it as needed
+    }
+  }
+
+  getMyOrders(): Observable<Product[]> {
+
+    // Perform a query to filter products by seller field
+    const dquery = query(this.myordersCollection, where('buyerEmail', '==', this.autSer.email));
+
+    // Convert the query snapshot to observable
+    return collectionData(dquery, { idField: 'id' }) as Observable<Product[]>;
+  }
+
+  buyPorduct(product: Product){
+    product.buyerEmail = this.autSer.email;
+    console.log('this.autSer.email', this.autSer.email)
+    const productData = { ...product };
+
+    const promise = addDoc(this.myordersCollection, productData).then((res) => {
+      return res.id;
+    });
+
+    return from(promise);
+  }
+
+
+  async removeFromMyOrders(id: string): Promise<void> {
+    // console.log("ID", product.id)
+    try {
+      // Assuming 'wishlist' is the name of the collection where wish list items are stored
+      const wishListDocRef = doc(this.myordersCollection, id);
+
+      // Delete the document from Firestore
+      await deleteDoc(wishListDocRef);
+
+      console.log('Product removed from wish list successfully.');
+    } catch (error) {
+        console.error('Error removing product from wish list:', error);
+        throw error; // Optionally, you can rethrow the error or handle it as needed
+    }
+  }
 
 }

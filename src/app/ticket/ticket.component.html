@@ -3,8 +3,7 @@
     <div class="ticket-head">
         <div class="pict">
             <img src="{{productimage}}" alt="">
-            <i class="fas fa-heart" [style.color]="isLiked ? 'red' : 'black'" (click)="toggleLike()"></i>
-        </div>
+            <i class="{{ order ? 'fas fa-times': 'fas fa-heart' }}" [style.color]="isLiked ? 'red' : 'black'" (click)="toggleLike()"></i>        </div>
     </div>
     <div class="ticket-footer">
         <div class="info">

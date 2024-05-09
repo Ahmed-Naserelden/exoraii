@@ -17,10 +17,12 @@ import { Router } from '@angular/router';
 export class AuthService {
   firebaseAuth = inject(Auth);
   user$ = user(this.firebaseAuth);
+  email: string = "";
 
   constructor(private router: Router){}
 
   register(email: string, username: string, password: string): Observable<void>{
+    this.email = email;
     const promise = createUserWithEmailAndPassword(
       this.firebaseAuth,
       email,
@@ -33,6 +35,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<void> {
+    this.email = email;
     const promise = signInWithEmailAndPassword(
       this.firebaseAuth,
       email,

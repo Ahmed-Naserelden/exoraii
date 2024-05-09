@@ -1,12 +1,17 @@
 
 
 export class Product {
+  id: string = "";
   name: string;
   price: number;
   description: string;
   loc: string;
   since: string;
-  images: string[] | undefined;
+  images: string[] = [];
+  sellerEmail: string = "";
+  wisherEmail: string = "";
+  buyerEmail: string = "";
+
 
   constructor(name: string, price: number, description: string, loc: string) {
     this.name = name;
@@ -14,6 +19,6 @@ export class Product {
     this.description = description;
     this.loc = loc;
     this.since = ''; // Assuming since is an empty string by default
-    this.images = undefined; // Assuming images is undefined by default
+    this.images = []; // Assuming images is undefined by default
   }
 }

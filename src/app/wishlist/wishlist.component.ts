@@ -22,11 +22,12 @@ export class WishlistComponent{
 
 
 
-      this.productService.getProducts().subscribe(
+      this.productService.getWishList().subscribe(
         (data)=>{
           console.log("DAta")
           console.log(data)
           this.wishlist = data
+          console.log("this.wishlist : ", this.wishlist[0].id)
         },
         (error) => {
           console.error('Error fetching products:', error);
@@ -35,6 +36,9 @@ export class WishlistComponent{
       console.log("this.productsSubscription");
       console.log(this.productsSubscription);
     }
+
+
+    
 
 
     ngOnDestroy () {
