@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { AuthRedirectGuard } from './auth-redirect.guard';
 import { MyordersComponent } from './myorders/myorders.component';
+import { MessengerComponent } from './messenger/messenger.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [AuthRedirectGuard]},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'notification', component: NotificationsComponent, canActivate: [AuthGuard]},
   {path: 'productdetails', component: ProductdetailsComponent, canActivate: [AuthGuard]},
   {path: 'myorders', component: MyordersComponent, canActivate: [AuthGuard]},
+  {path: 'messenger', component: MessengerComponent, canActivate: [AuthGuard]}
 
 ];
 

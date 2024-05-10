@@ -11,6 +11,7 @@ export class Product {
   sellerEmail: string = "";
   wisherEmail: string = "";
   buyerEmail: string = "";
+  category: string = "";
 
 
   constructor(name: string, price: number, description: string, loc: string) {

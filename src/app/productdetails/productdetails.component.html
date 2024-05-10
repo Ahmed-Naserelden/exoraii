@@ -7,46 +7,46 @@
     <div class="left">
         <div class="pic">
             <div class="images">
-                <div class="small-img" >
-                    <img src="{{image}}" style="transform: rotate(50deg);" onclick="showImg(this.src)">
+                <!-- <div class="small-img" >
+                    <img src="{{product?.images[0]}}" style="transform: rotate(50deg);" onclick="showImg(this.src)">
                 </div>
                 <div class="small-img">
-                    <img src="{{image}}" style="transform: scaleX(-1);" onclick="showImg(this.src)">
+                    <img src="{{ product?.images[0] }}" style="transform: scaleX(-1);" onclick="showImg(this.src)">
                 </div>
                 <div class="small-img">
-                    <img src="{{image}}" style="transform: rotate(300deg)" onclick="showImg(this.src)">
+                    <img src="{{product?.images[0] }}" style="transform: rotate(300deg)" onclick="showImg(this.src)">
                 </div>
                 <div class="small-img">
-                    <img src="{{image}}" onclick="showImg(this.src)">
-                </div>
+                    <img src="{{ product?.images[0] }}" onclick="showImg(this.src)">
+                </div> -->
             </div>
             <div class="big-img">
-                <img src="{{image}}">
+                <!-- <img src="{{product?.images[0]}}"> -->
             </div>
         </div>
         <div class="description">
             <p><strong>Description</strong></p>
-            <p>{{description}}</p>
+            <p>{{ product?.description}}</p>
         </div>
     </div>
 
     <div class="right">
-        <div class="pname">{{name}}</div>
+        <div class="pname">{{ product?.name}}</div>
         
-        <p><strong>{{city}}</strong></p>
+        <p><strong>{{ product?.loc }}</strong></p>
         <p><strong>1st Owner</strong></p>
-        <div class="price"><strong>{{price}} LE </strong></div>
+        <div class="price"><strong>{{ product?.price }} LE </strong></div>
         
         
         <div class="btn-box">
-            <button class="cart-btn">Add to Cart</button>
-            <button class="buy-btn">Buy Now</button>
+            <button class="cart-btn" (click)="addToWishList()">Add to wish list</button>
+            <button class="buy-btn" (click)="buyPorduct()">Buy Now</button>
         </div>
 
         <div class="seller">
             <p class="seller-title">Seller</p>
             <div style="padding: 10px;">
-                <h3>{{sellarname}}</h3>
+                <h3>{{ product?.sellerEmail }}</h3>
                 <div class="ratings">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>

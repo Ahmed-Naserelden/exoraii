@@ -104,6 +104,14 @@ export class ProductsService {
     return collectionData(dquery, { idField: 'id' }) as Observable<Product[]>;
   }
 
+  getCategory(category: string): Observable<Product[]>{
+    // Perform a query to filter products by seller field
+    const dquery = query(this.productsCollection, where('category', '==', category));
+
+    // Convert the query snapshot to observable
+    return collectionData(dquery, { idField: 'id' }) as Observable<Product[]>;
+  }
+
 
   async removeFromWishList(id: string): Promise<void> {
     // console.log("ID", product.id)

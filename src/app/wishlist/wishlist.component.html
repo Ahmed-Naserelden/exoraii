@@ -5,13 +5,17 @@
     
     <div class=".flex-item" *ngFor="let product of wishlist; index as i">    
         <app-ticket class="flex-item"
+            [isLiked]="true"
+            [id]="product.id"
             [productname]="product.name"
             [productimage]=""
             [productprice]="product.price"
             [location]="product.loc"
             [since]="product.since"
-            [isLiked]="true"
-            [id]="product.id"
+            [category]="product.category"
+            [producdescription]="product.description"
+            [sellerEmail]="product.sellerEmail"
+            [wisherEmail]="product.wisherEmail"
         >
         </app-ticket>
     </div>

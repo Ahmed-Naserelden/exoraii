@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ProfileService } from '../services/profile.service';
 import { Profile } from '../model/profile';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -13,22 +15,29 @@ export class UserprofileComponent {
 
 
   profile: Profile | undefined;
+  
+
   productsSubscription: Subscription | undefined;
 
   email: string = "ahmed@gmail.com";
-  constructor(profileService: ProfileService){
-    profileService.getData(this.email).subscribe(
+  constructor(profileService: ProfileService, private autSer: AuthService, private shareData: SharedService){
+    this.profile = {
+      name: "undefined",
+      email: "undefined",
+      phone:"undefined",
+      since: "undefined",
+      dateofbirth: "undefined",
+      reviews : 0,
+      products: 0,
+      followers: 0
+    };
+
+
+    console.log("this.shareData.curUserEmail : ", this.shareData.curUserEmail);
+    profileService.getData(this.shareData.curUserEmail ? this.shareData.curUserEmail : "").subscribe(
       (data)=>{
-        // console.log(data)
         this.profile = data;
-        console.log("wishlist")
-        // console.log(this.profile?.wishlist?.[0].description);
-        if (this.profile.wishlist) {
-          // If wishlist is not null or undefined
-    
-        } else {
-          console.log("No wishlist items found.");
-        }
+        
       }, (err)=>{
         console.error('Error fetching products:', err);
       }

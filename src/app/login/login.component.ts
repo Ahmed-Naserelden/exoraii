@@ -2,6 +2,7 @@ import { Component, ViewChild, inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent {
   @ViewChild('loginForm') loginForm!: NgForm;
   router = inject(Router);
 
-  constructor(private auth: AuthService){}
+  constructor(private auth: AuthService, private sharedData: SharedService){}
 
   email: string = "";
   password: string = "";
@@ -27,6 +28,7 @@ export class LoginComponent {
       console.log('Password:', this.password);
 
       console.log("Start login")
+      this.sharedData.curUserEmail = this.email;
       this.auth.login(this.email, this.password).subscribe({
         next: () => {
           this.router.navigateByUrl('/');

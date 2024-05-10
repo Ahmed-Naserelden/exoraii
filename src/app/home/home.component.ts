@@ -19,7 +19,6 @@ export class HomeComponent {
     // console.log(this.wishlist)
 
 
-
     this.productService.getProducts().subscribe(
       (data)=>{
         console.log("DAta")
@@ -32,6 +31,19 @@ export class HomeComponent {
     );
     console.log("this.productsSubscription");
     console.log(this.productsSubscription);
+  }
+
+  getCategory(category: string){
+    this.productService.getCategory(category).subscribe(
+      (data)=>{
+        console.log("DAta")
+        console.log(data)
+        this.wishlist = data
+      },
+      (error) => {
+        console.error('Error fetching products:', error);
+      }
+    );
   }
 
   buyOrder(i: number){

@@ -5,6 +5,10 @@
       </div>
 
       <div class="input-group">
+        <input type="text" class="form-control" id="category" placeholder="Enter task category name" [(ngModel)]="product.category" name="task-name" required>
+      </div>
+
+      <div class="input-group">
         <textarea class="form-control" id="description" rows="4" placeholder="Enter description" [(ngModel)]="product.description" name="task-description" required></textarea>
       </div>
 

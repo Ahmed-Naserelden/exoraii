@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Product } from '../model/product';
 import { ProductsService } from '../services/products.service';
 import { Subscription } from 'rxjs';
+import { SharedService } from '../services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket',
@@ -18,18 +20,14 @@ export class TicketComponent {
   @Input() sellerEmail: string = '';
   @Input() wisherEmail: string = '';
   @Input() order: boolean = false;
-
+  @Input() buyerEmail: string = '';
   @Input() producdescription: string ="undefined";
   productsSubscription: Subscription | undefined;
-  
-  constructor(private productServices: ProductsService){
-
-  }
-
-
   @Input() isLiked: boolean = false;
- 
+  @Input() category: string = "";
+
   product: Product = {
+    category: '',
     id: '',
     name: '',
     description: '',
@@ -41,6 +39,13 @@ export class TicketComponent {
     buyerEmail: '',
     images: [] // Reset the images property to an empty array
   };
+  
+  constructor(private productServices: ProductsService, private sharedServices: SharedService){
+    
+  }
+
+
+ 
 
   toggleLike() {
     if(!this.isLiked && this.order == false)
@@ -49,29 +54,15 @@ export class TicketComponent {
       this.removeFromWishList()
     else if(this.order == true)
       this.removeFromMyOrders();
-    
-    
-    
+
     
     this.isLiked = !this.isLiked;
   }
 
   addToWishList(){
-    this.product = {
-      id: this.id,
-      name: this.productname,
-      description: this.producdescription,
-      since: this.since,
-      price: this.productprice,
-      buyerEmail: '',
-      loc: this.location,
-      sellerEmail: '',
-      wisherEmail: '',
-      images: [] 
-    };
+    this.fillProduct();
 
     this.productServices.addToWishList(this.product);
-
   }
 
   removeFromMyOrders(){
@@ -81,6 +72,37 @@ export class TicketComponent {
   removeFromWishList(){
     console.log("this.id : ", this.id);
     this.productServices.removeFromWishList(this.id);
+  }
+
+  router = inject(Router)
+
+  clickOnLinkToViewDetails(){
+    this.fillProduct();
+
+
+    console.log(this.product);
+    this.sharedServices.product = this.product; 
+    this.router.navigateByUrl('/productdetails');
+
+  }
+
+
+  fillProduct(){
+    this.product = {
+      category: this.category ? this.category : "",
+      id: this.id ? this.id : "",
+      name: this.productname ? this.productname : "",
+      description: this.producdescription ? this.producdescription : "",
+      since: this.since ? this.since : "",
+      price: this.productprice ? this.productprice : 0,
+      buyerEmail: this.buyerEmail ? this.buyerEmail : "",
+      loc: this.location ? this.location : "",
+      sellerEmail: this.sellerEmail ? this.sellerEmail : "",
+      wisherEmail: this.wisherEmail ? this.wisherEmail : "",
+
+      images: [] 
+    };
+    console.log(this.product);
   }
 
 }

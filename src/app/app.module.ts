@@ -30,6 +30,7 @@ import { getStorage } from 'firebase/storage';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MyordersComponent } from './myorders/myorders.component';
+import { MessengerComponent } from './messenger/messenger.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAaaxew6bQkNEptvm8d_Xyn5wg0_cqL6z0",
@@ -59,7 +60,8 @@ const firebaseConfig = {
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    MyordersComponent
+    MyordersComponent,
+    MessengerComponent
   ],
   imports: [
     FormsModule,

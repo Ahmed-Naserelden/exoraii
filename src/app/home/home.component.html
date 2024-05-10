@@ -3,10 +3,16 @@
   <div class=".flex-item" *ngFor="let product of wishlist; index as i">    
       <app-ticket class="flex-item"
           [productname]="product.name"
+          [id]="product.id"
           [productimage]=""
           [productprice]="product.price"
           [location]="product.loc"
           [since]="product.since"
+          [category]="product.category"
+          [producdescription]="product.description"
+          [sellerEmail]="product.sellerEmail"
+          [wisherEmail]="product.wisherEmail"
+          [order]="false"
       >
       </app-ticket>
       <button (click)="buyOrder(i)">buy</button>

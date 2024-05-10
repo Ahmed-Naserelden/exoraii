@@ -39,6 +39,7 @@ export class ProductInfoComponent {
     this.productService.addProduct(this.product, this.image);
 
     this.product = {
+      category: "",
       id: "",
       name: '',
       description: '',
