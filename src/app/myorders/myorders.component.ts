@@ -30,7 +30,7 @@ export class MyordersComponent {
     );
 
     console.log("this.productsSubscription");
-    console.log(this.productsSubscription);
+   
   }
 
   

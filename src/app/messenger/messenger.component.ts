@@ -23,8 +23,7 @@ export class MessengerComponent {
     console.log(this.currentUser)
     // Initialize messages from your backend or mock data
     this.conversation.messages = [
-      { sender: 'Alice', text: 'Hello!', timestamp: String(new Date())},
-      { sender: 'John Doe', text: 'Hi there!', timestamp: String(new Date()) }
+    
     ];
     this.chatService.getConversation(this.sharedData.conversationId).subscribe(conversation => {
       if(conversation)

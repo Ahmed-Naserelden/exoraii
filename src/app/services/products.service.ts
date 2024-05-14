@@ -185,4 +185,16 @@ export class ProductsService {
   }
 
 
+  
+
 }
+
+/*
+// search(productname: String): Observable<Product>{
+  //   // Perform a query to filter products by seller field
+  //   const dquery = query(this.productsCollection, where('name', '==', productname));
+
+  //   // Convert the query snapshot to observable
+  //   return collectionData(dquery, { idField: 'id' }) as Observable<Product>;
+  // }
+*/
