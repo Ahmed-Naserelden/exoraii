@@ -11,7 +11,7 @@ import { ProfileService } from '../services/profile.service';
   styleUrl: './messenger.component.css'
 })
 export class MessengerComponent {
-  conversation: Conversation = {conversationId: "", messages: [] };
+  conversation: Conversation = {reciever: "", sender: "", conversationId: "", messages: [] };
   newMessage: string = '';
   
   

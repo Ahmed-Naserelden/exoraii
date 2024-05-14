@@ -19,32 +19,45 @@ export class HomeComponent {
     // console.log(this.wishlist)
 
 
-    this.productService.getProducts().subscribe(
-      (data)=>{
-        console.log("DAta")
-        console.log(data)
-        this.wishlist = data
-      },
-      (error) => {
-        console.error('Error fetching products:', error);
-      }
-    );
-    console.log("this.productsSubscription");
-    console.log(this.productsSubscription);
-  }
+      this.productService.getProducts().subscribe(
+        (data)=>{
+          console.log("DAta")
+          console.log(data)
+          this.wishlist = data
+        },
+        (error) => {
+          console.error('Error fetching products:', error);
+        }
+      );
+      console.log("this.productsSubscription");
+      console.log(this.productsSubscription);
+    }
 
-  getCategory(category: string){
-    this.productService.getCategory(category).subscribe(
-      (data)=>{
-        console.log("DAta")
-        console.log(data)
-        this.wishlist = data
-      },
-      (error) => {
-        console.error('Error fetching products:', error);
-      }
-    );
-  }
+    searchByCategory(category: string){
+      this.productService.searchByCategory(category).subscribe(
+        (data)=>{
+          console.log("DAta")
+          console.log(data)
+          this.wishlist = data
+        },
+        (error) => {
+          console.error('Error fetching products:', error);
+        }
+      );
+    }
+
+    searchByLocation(loc: string){
+      this.productService.searchByCategory(loc).subscribe(
+        (data)=>{
+          console.log("DAta")
+          console.log(data)
+          this.wishlist = data
+        },
+        (error) => {
+          console.error('Error fetching products:', error);
+        }
+      );
+    }
 
   buyOrder(i: number){
     this.productService.buyPorduct(this.wishlist[i]);

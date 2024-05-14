@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ChatingService } from '../services/chating.service';
+import { Conversation } from '../model/Conversation';
+import { SharedService } from '../services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notifications',
@@ -6,7 +10,33 @@ import { Component } from '@angular/core';
   styleUrl: './notifications.component.css'
 })
 export class NotificationsComponent {
-  notifications = [
-    1, 2, 3, 4
-  ];
+  notifications: Conversation[] = [];
+
+  constructor(private shareData: SharedService, private chateServices: ChatingService){}
+
+  ngOnInit():void{
+    this.chateServices.getConversations().subscribe((conversations)=>{
+      this.notifications = conversations;
+    });
+    console.log(this.notifications);
+  }
+
+  getNotifications(notification: Conversation): String{
+
+    if(notification.sender == this.shareData.curUserEmail)
+        return notification.reciever;
+    else if(notification.reciever == this.shareData.curUserEmail)
+      return notification.sender;
+
+    
+    return "";
+  }
+
+  router = inject(Router);
+
+  navigatToMessenger(conversationId: String){
+    this.shareData.conversationId = conversationId + "";
+    this.router.navigate(['/messenger']);
+  }
+
 }

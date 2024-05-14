@@ -31,7 +31,7 @@ export class LoginComponent {
       this.sharedData.curUserEmail = this.email;
       this.auth.login(this.email, this.password).subscribe({
         next: () => {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('profile');
         },
         error: (err) => {
 

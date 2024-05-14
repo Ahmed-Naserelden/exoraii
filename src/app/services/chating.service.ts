@@ -4,13 +4,14 @@ import { DataSnapshot, Database, get, getDatabase, onValue, push, ref, set} from
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Conversation } from '../model/Conversation';
 import { Messege } from '../model/message';
+import { SharedService } from './shared.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatingService {
   private db: Database;
-  constructor() { 
+  constructor(private sharedData: SharedService) { 
     this.db = getDatabase();
   }
 
@@ -53,6 +54,9 @@ export class ChatingService {
 
   // `Conversation/${conversationId}/messages/` is Array not object 
   async sendMessage(conversationId: string, message: Messege): Promise<void> {
+    if( this.sharedData.sender && this.sharedData.reciever)
+      this.updateconversationmetaData(conversationId);
+  
     try {
         const messagesRef = ref(this.db, `Conversation/${conversationId}/messages/`);
         
@@ -71,6 +75,24 @@ export class ChatingService {
         console.error("Error sending message:", error);
         return Promise.reject(error);
     }
-}
+  }
 
+  async updateconversationmetaData(conversationId: String): Promise<void>{
+    try{
+      const sender = ref(this.db, `Conversation/${conversationId}/sender`);
+      const reciever = ref(this.db, `Conversation/${conversationId}/reciever`);
+
+
+      await set(sender, this.sharedData.sender);
+      await set(reciever, this.sharedData.reciever);
+
+      return Promise.resolve();
+  
+    } catch (error) {
+      console.error("Error sending message:", error);
+      return Promise.reject(error);
+    }
+  }
+
+ 
 }

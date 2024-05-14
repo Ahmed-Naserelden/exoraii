@@ -14,6 +14,7 @@ export class ProductdetailsComponent {
   feedbackText: string = ''; // Add a property for the feedback text
   feedbacks: string[] = [];  // Add an array to store feedback messages
 
+  
   router = inject(Router);
 
   constructor(private sharedServ: SharedService, private productService: ProductsService) {
@@ -35,7 +36,12 @@ export class ProductdetailsComponent {
       var text1 = this.sharedServ.removeDomain(this.sharedServ.profile.email + "") + this.sharedServ.removeDomain(this.product?.sellerEmail);
       var text2 = this.sharedServ.removeDomain(this.product?.sellerEmail) + this.sharedServ.removeDomain(this.sharedServ.profile.email + ""); 
       const conversationId = text1 < text2 ? text1 : text2;
+
       this.sharedServ.conversationId = conversationId;
+      this.sharedServ.sender = this.product?.sellerEmail < this.sharedServ.profile.email + "" ? this.product?.sellerEmail : this.sharedServ.profile.email + "";
+      this.sharedServ.reciever = this.product?.sellerEmail > this.sharedServ.profile.email + "" ? this.product?.sellerEmail : this.sharedServ.profile.email + "";
+
+
       this.router.navigate(['messenger']);;
     }
   }

@@ -19,6 +19,10 @@ export class SharedService {
     products:  0,
     followers: 0
   };
+
+  sender: String = "";
+  reciever: String = "";
+  
   constructor() { }
 
 
