@@ -11,7 +11,7 @@ import { ProductsService } from '../services/products.service';
 export class HomeComponent {
   wishlist: Product[] = [];
   productsSubscription: Subscription | undefined;
-
+  
 
   constructor(private productService: ProductsService){
 
@@ -24,6 +24,7 @@ export class HomeComponent {
           console.log("DAta")
           console.log(data)
           this.wishlist = data
+
         },
         (error) => {
           console.error('Error fetching products:', error);
@@ -66,5 +67,11 @@ export class HomeComponent {
 
   ngOnDestroy () {
     this.productsSubscription?.unsubscribe();
+  }
+  func(i : number): string{
+    if(this.wishlist[i].image && this.wishlist[i].image != ""){
+      return this.wishlist[i].image;
+    }
+    return "https://c4.wallpaperflare.com/wallpaper/597/950/396/hd-image-of-nature-for-pc-1920x1080-wallpaper-preview.jpg"
   }
 }

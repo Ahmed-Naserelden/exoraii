@@ -21,7 +21,7 @@ export class NotificationsComponent {
     console.log(this.notifications);
   }
 
-  getNotifications(notification: Conversation): String{
+  getNotifications(notification: Conversation): String | undefined{
 
     if(notification.sender == this.shareData.curUserEmail)
         return notification.reciever;
@@ -29,7 +29,7 @@ export class NotificationsComponent {
       return notification.sender;
 
     
-    return "";
+    return undefined;
   }
 
   router = inject(Router);

@@ -37,7 +37,7 @@ export class TicketComponent {
     sellerEmail: '',
     wisherEmail: '',
     buyerEmail: '',
-    images: [] // Reset the images property to an empty array
+    image: "" // Reset the images property to an empty array
   };
   
   constructor(private productServices: ProductsService, private sharedServices: SharedService){
@@ -100,7 +100,7 @@ export class TicketComponent {
       sellerEmail: this.sellerEmail ? this.sellerEmail : "",
       wisherEmail: this.wisherEmail ? this.wisherEmail : "",
 
-      images: [] 
+      image: ""
     };
     console.log(this.product);
   }

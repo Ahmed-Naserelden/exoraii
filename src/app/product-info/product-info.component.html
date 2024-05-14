@@ -23,6 +23,9 @@
       <div class="input-group">
         <input type="text" class="form-control" id="location" placeholder="Enter location" [(ngModel)]="product.loc" name="task-location" required>
       </div>
+      <div class="input-group">
+        <input type="text" class="form-control" id="image" placeholder="Enter Image Url" [(ngModel)]="product.image" name="task-location" required>
+      </div>
 
       <div class="input-group">
         <!-- Drag and drop area -->
@@ -32,11 +35,12 @@
           <button class="upload-button" (click)="fileInput.click()">Select Files</button>
         </div>
       </div>
-
+      
+     
        <!-- Display uploaded file list -->
       <div class="uploaded-files">
         <ul>
-          <li *ngFor="let image of product.images; index as i">{{ image }}</li>
+          <li *ngFor="let image of product.image; index as i">{{ image }}</li>
         </ul> 
       </div>
 

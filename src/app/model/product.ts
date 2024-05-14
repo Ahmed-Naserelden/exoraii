@@ -7,7 +7,7 @@ export class Product {
   description: string;
   loc: string;
   since: string;
-  images: string[] = [];
+  image: string = "";
   sellerEmail: string = "";
   wisherEmail: string = "";
   buyerEmail: string = "";
@@ -20,6 +20,6 @@ export class Product {
     this.description = description;
     this.loc = loc;
     this.since = ''; // Assuming since is an empty string by default
-    this.images = []; // Assuming images is undefined by default
+    this.image = ""; // Assuming images is undefined by default
   }
 }

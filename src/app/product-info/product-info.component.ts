@@ -49,7 +49,7 @@ export class ProductInfoComponent {
       sellerEmail: '',
       buyerEmail: '',
       wisherEmail: '',
-      images: [] // Reset the images property to an empty array
+      image: "" // Reset the images property to an empty array
     };
     console.log(this.productService.getProducts());
   }
