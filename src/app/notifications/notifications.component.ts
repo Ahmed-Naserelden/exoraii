@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './notifications.component.css'
 })
 export class NotificationsComponent {
-
+  notifications = [
+    1, 2, 3, 4
+  ];
 }

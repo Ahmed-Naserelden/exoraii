@@ -31,6 +31,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { MessengerComponent } from './messenger/messenger.component';
+import { getDatabase } from 'firebase/database';
+import { provideDatabase } from '@angular/fire/database';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAaaxew6bQkNEptvm8d_Xyn5wg0_cqL6z0",
@@ -70,7 +72,8 @@ const firebaseConfig = {
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(()=> getAuth()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    provideDatabase(() => getDatabase()),
     // AngularFireStorageModule,
   ],
   providers: [],

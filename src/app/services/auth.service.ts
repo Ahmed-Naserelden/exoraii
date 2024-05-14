@@ -13,6 +13,7 @@ import { Firestore, addDoc, setDoc, deleteDoc, doc, collection, collectionData }
 import { Router } from '@angular/router';
 import { Profile } from '../model/profile';
 import { SharedService } from './shared.service';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,7 @@ export class AuthService {
     followers: 0
   };
 
-  constructor(private router: Router, private sharedData: SharedService){}
+  constructor(private router: Router, private sharedData: SharedService, private profileSer: ProfileService){}
 
   register(email: string, username: string, password: string): Observable<void>{
     this.sharedData.curUserEmail = email;
@@ -65,8 +66,9 @@ export class AuthService {
 
   login(email: string, password: string): Observable<void> {
     this.email = email;
-
-
+    // userData = profileSer.getData();
+    this.sharedData.profile.email = email;
+    this.sharedData.curUserEmail = email;
     const promise = signInWithEmailAndPassword(
       this.firebaseAuth,
       email,

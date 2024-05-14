@@ -13,7 +13,7 @@ import { SharedService } from './shared.service';
 })
 export class ProfileService {
 
-  constructor(private fireStore: Firestore, sharedData: SharedService) { }
+  constructor(private fireStore: Firestore,private sharedData: SharedService) { }
 
   getData(userEmail: string): Observable<Profile>{
     const userDocRef = doc(this.fireStore, 'profile', userEmail); // Reference to the user document
@@ -26,6 +26,7 @@ export class ProfileService {
         if (doc.exists()) {
         
           const userData = doc.data() as Profile; // Convert Firestore document data to Profile type
+          this.sharedData.profile = userData;
           observer.next(userData); // Emit the user data
         
         } else {
