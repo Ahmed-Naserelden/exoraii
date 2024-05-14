@@ -10,7 +10,7 @@ import { ProductsService } from '../services/products.service';
 })
 export class MyordersComponent {
   
-  wishlist: Product[] = [];
+  products: Product[] = [];
   productsSubscription: Subscription | undefined;
 
 
@@ -22,7 +22,7 @@ export class MyordersComponent {
       (data)=>{
         console.log("DAta")
         console.log(data)
-        this.wishlist = data
+        this.products = data
       },
       (error) => {
         console.error('Error fetching products:', error);
@@ -37,6 +37,13 @@ export class MyordersComponent {
 
   ngOnDestroy () {
     this.productsSubscription?.unsubscribe();
+  }
+
+  func(i : number): string{
+    if(this.products[i].image && this.products[i].image != ""){
+      return this.products[i].image;
+    }
+    return "https://c4.wallpaperflare.com/wallpaper/597/950/396/hd-image-of-nature-for-pc-1920x1080-wallpaper-preview.jpg"
   }
 
 }

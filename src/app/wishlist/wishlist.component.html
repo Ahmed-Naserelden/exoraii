@@ -1,6 +1,7 @@
-
 <!-- <app-sidebar></app-sidebar> -->
-
+<app-search-bar></app-search-bar>
+<!-- <app-navbar></app-navbar> -->
+<app-sidebar></app-sidebar>
 <div class="wish-list">
     
     <div class=".flex-item" *ngFor="let product of wishlist; index as i">    
@@ -8,7 +9,7 @@
             [isLiked]="true"
             [id]="product.id"
             [productname]="product.name"
-            [productimage]=""
+            [productimage]="func(i)"
             [productprice]="product.price"
             [location]="product.loc"
             [since]="product.since"

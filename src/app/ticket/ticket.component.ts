@@ -22,10 +22,10 @@ export class TicketComponent {
   @Input() order: boolean = false;
   @Input() buyerEmail: string = '';
   @Input() producdescription: string ="undefined";
-  productsSubscription: Subscription | undefined;
   @Input() isLiked: boolean = false;
   @Input() category: string = "";
-
+  
+  productsSubscription: Subscription | undefined;
   product: Product = {
     category: '',
     id: '',
@@ -100,7 +100,7 @@ export class TicketComponent {
       sellerEmail: this.sellerEmail ? this.sellerEmail : "",
       wisherEmail: this.wisherEmail ? this.wisherEmail : "",
 
-      image: ""
+      image: this.productimage ? this.productimage : ""
     };
     console.log(this.product);
   }

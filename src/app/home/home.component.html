@@ -1,3 +1,14 @@
+<app-search-bar></app-search-bar>
+<!-- <app-navbar></app-navbar> -->
+<nav>
+  <ul>
+      <li><a (click)="filter('Technology')">Technologies</a></li>
+      <li><a (click)="filter('animal')">Animals</a></li>
+      <li><a (click)="filter('cars')">Cars</a></li>
+      <li><a (click)="filter('Electronics')">Electronics</a></li>
+  </ul>
+</nav>
+<app-sidebar></app-sidebar>
 <div class="wish-list">
     
   <div class=".flex-item" *ngFor="let product of wishlist; index as i">    
