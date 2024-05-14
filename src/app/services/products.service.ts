@@ -10,6 +10,7 @@ import { Firestore, addDoc, setDoc, deleteDoc, doc, collection, collectionData }
 import { Storage, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { AuthService } from './auth.service';
 import { query, where } from 'firebase/firestore';
+import { SharedService } from './shared.service';
 
 // import { AngularFireStorage } from '@angular/fire/compat/storage';
 
@@ -30,7 +31,7 @@ export class ProductsService {
 
 
 
-  constructor(private autSer: AuthService){}
+  constructor(private autSer: AuthService, private sharedData: SharedService){}
 
 
   getProducts(): Observable<Product[]>{
@@ -56,7 +57,7 @@ export class ProductsService {
   //   // }
   // }
 
-  addProduct(product: Product, file: File): Observable<String>{
+  addProduct(product: Product): Observable<String>{
     // uploadFile(file);
     product.sellerEmail = this.autSer.email;
     const productData = { ...product };
@@ -174,5 +175,14 @@ export class ProductsService {
         throw error; // Optionally, you can rethrow the error or handle it as needed
     }
   }
+
+  getMyPostedProducts(): Observable<Product[]>{
+    // Perform a query to filter products by seller field
+    const dquery = query(this.productsCollection, where('sellerEmail', '==', this.sharedData.profile.email));
+
+    // Convert the query snapshot to observable
+    return collectionData(dquery, { idField: 'id' }) as Observable<Product[]>;
+  }
+
 
 }

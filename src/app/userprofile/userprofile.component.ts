@@ -4,6 +4,8 @@ import { Profile } from '../model/profile';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { SharedService } from '../services/shared.service';
+import { Product } from '../model/product';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -16,11 +18,12 @@ export class UserprofileComponent {
 
   profile: Profile | undefined;
   
-
+  myPostedProducts : Product[] = [];
+  
   productsSubscription: Subscription | undefined;
 
   email: string = "ahmed@gmail.com";
-  constructor(profileService: ProfileService, private autSer: AuthService, private shareData: SharedService){
+  constructor(private productServices: ProductsService, private profileService: ProfileService, private autSer: AuthService, private shareData: SharedService){
     this.profile = {
       name: "undefined",
       email: "undefined",
@@ -42,7 +45,15 @@ export class UserprofileComponent {
         console.error('Error fetching products:', err);
       }
     );
+
+    productServices.getMyPostedProducts().subscribe((data)=>{
+      this.myPostedProducts = data;
+    }, (err)=>{
+      console.error('Error fetching products:', err);
+    });
   }
+
+
 
 
   ngOnDestroy () {

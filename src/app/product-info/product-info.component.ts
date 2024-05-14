@@ -23,12 +23,12 @@ export class ProductInfoComponent {
 
 
   product: Product = new Product('', 0, '', '');
-  image: File | undefined;
+  // image: File | undefined;
   constructor(private productService: ProductsService){}
 
   addItem() {
     // Check if any of the form fields are empty
-    if ( !this?.image || !this.product?.name || !this.product?.description || !this.product?.since || !this.product.price || !this.product?.loc) {
+    if ( !this.product?.name || !this.product?.description || !this.product?.since || !this.product.price || !this.product?.loc) {
       alert("Please fill in all fields.");
       return;
     }
@@ -36,7 +36,7 @@ export class ProductInfoComponent {
     console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
     // Push the current productInfo to the productList
-    this.productService.addProduct(this.product, this.image);
+    this.productService.addProduct(this.product);
 
     this.product = {
       category: "",
@@ -69,7 +69,7 @@ export class ProductInfoComponent {
       //   const base64Image = await this.convertFileToBase64(file);
       //   console.log(base64Image); // Do something with the base64Image
       // }
-      this.image = event.target.files[0];
+      // this.image = event.target.files[0];
 
     }
 

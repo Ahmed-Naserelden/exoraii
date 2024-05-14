@@ -34,6 +34,8 @@ import { MessengerComponent } from './messenger/messenger.component';
 import { getDatabase } from 'firebase/database';
 import { provideDatabase } from '@angular/fire/database';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MypostedproductComponent } from './mypostedproduct/mypostedproduct.component';
+import { ReportsComponent } from './reports/reports.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAaaxew6bQkNEptvm8d_Xyn5wg0_cqL6z0",
@@ -65,7 +67,9 @@ const firebaseConfig = {
     RegisterComponent,
     MyordersComponent,
     MessengerComponent,
-    NavbarComponent
+    NavbarComponent,
+    MypostedproductComponent,
+    ReportsComponent
   ],
   imports: [
     FormsModule,
